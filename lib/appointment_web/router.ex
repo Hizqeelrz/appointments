@@ -7,6 +7,7 @@ defmodule AppointmentWeb.Router do
 
   scope "/api", AppointmentWeb do
     pipe_through :api
-    
+
+    resources "/doctors", DoctorController, except: [:new, :edit]
   end
 end

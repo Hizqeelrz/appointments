@@ -11,7 +11,7 @@ defmodule Appointment.Appointments.Patient do
     field :firstname, :string
     field :gender, :string
     field :lastname, :string
-    field :phone, :integer
+    field :phone, :string
     field :state, :string
 
     timestamps()

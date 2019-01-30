@@ -9,5 +9,7 @@ defmodule AppointmentWeb.Router do
     pipe_through :api
 
     resources "/doctors", DoctorController, except: [:new, :edit]
+    resources "/patients", PatientController, except: [:new, :edit]
+
   end
 end

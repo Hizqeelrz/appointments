@@ -2,6 +2,7 @@ defmodule Appointment.Appointments.Doctor do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Appointment.Appointments.Appointment
 
   schema "doctors" do
     field :age, :integer
@@ -10,6 +11,8 @@ defmodule Appointment.Appointments.Doctor do
     field :name, :string
     field :qualification, :string
     field :speciality, :string
+
+    has_many :appointments, Appointment
 
     timestamps()
   end

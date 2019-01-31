@@ -20,7 +20,7 @@ defmodule Appointment.Appointments.Appointment do
   @doc false
   def changeset(appointment, attrs) do
     appointment
-    |> cast(attrs, [:description, :date, :start_time, :end_time])
-    |> validate_required([:description, :date, :start_time, :end_time])
+    |> cast(attrs, [:description, :date, :start_time, :end_time, :patient_id, :doctor_id])
+    |> validate_required([:description, :date, :start_time, :end_time, :patient_id, :doctor_id])
   end
 end

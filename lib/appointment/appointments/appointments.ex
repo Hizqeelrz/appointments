@@ -203,7 +203,7 @@ defmodule Appointment.Appointments do
   ##--------------------------------------------------
   ## Appointment Context Start
   ##--------------------------------------------------
-  
+
   @doc """
   Returns the list of appointments.
 
@@ -214,7 +214,9 @@ defmodule Appointment.Appointments do
 
   """
   def list_appointments do
-    Repo.all(Appointment)
+    Appointment
+    |> Repo.all()
+    |> Repo.preload([:patient, :doctor])
   end
 
   @doc """
@@ -231,7 +233,11 @@ defmodule Appointment.Appointments do
       ** (Ecto.NoResultsError)
 
   """
-  def get_appointment!(id), do: Repo.get!(Appointment, id)
+  def get_appointment!(id) do
+    Appointment
+    |> Repo.get!(id)
+    |> Repo.preload([:patient, :doctor])
+  end
 
   @doc """
   Creates a appointment.
@@ -245,9 +251,10 @@ defmodule Appointment.Appointments do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_appointment(attrs \\ %{}) do
+  def create_appointment(%Patient{} = patient,attrs \\ %{}) do
     %Appointment{}
     |> Appointment.changeset(attrs)
+    |> Ecto.Changeset.put_change(:patient_id, patient.id)
     |> Repo.insert()
   end
 

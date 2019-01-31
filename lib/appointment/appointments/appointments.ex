@@ -6,7 +6,7 @@ defmodule Appointment.Appointments do
   import Ecto.Query, warn: false
   alias Appointment.Repo
 
-  alias Appointment.Appointments.Doctor
+  alias Appointment.Appointments.{Doctor, Patient, Appointment}
 
   @doc """
   Returns the list of doctors.
@@ -102,7 +102,9 @@ defmodule Appointment.Appointments do
     Doctor.changeset(doctor, %{})
   end
 
-  alias Appointment.Appointments.Patient
+##--------------------------------------------------
+## Patient Context Start
+##--------------------------------------------------
 
   @doc """
   Returns the list of patients.
@@ -198,8 +200,10 @@ defmodule Appointment.Appointments do
     Patient.changeset(patient, %{})
   end
 
-  alias Appointment.Appointments.Appointment
-
+  ##--------------------------------------------------
+  ## Appointment Context Start
+  ##--------------------------------------------------
+  
   @doc """
   Returns the list of appointments.
 

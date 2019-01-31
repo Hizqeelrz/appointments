@@ -10,6 +10,7 @@ defmodule AppointmentWeb.Router do
 
     resources "/doctors", DoctorController, except: [:new, :edit]
     resources "/patients", PatientController, except: [:new, :edit]
+    resources "/appointments", AppointmentController, except: [:new, :edit]
 
   end
 end

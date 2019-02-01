@@ -15,6 +15,8 @@ defmodule AppointmentWeb.AppointmentView do
       description: appointment.description,
       start_time: appointment.start_time,
       end_time: appointment.end_time,
-      date: appointment.date}
+      date: appointment.date,
+      patient_id: appointment.patient_id,
+      doctor_id: appointment.doctor_id}
   end
 end

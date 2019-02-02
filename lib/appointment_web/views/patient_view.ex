@@ -22,4 +22,6 @@ defmodule AppointmentWeb.PatientView do
       state: patient.state,
       phone: patient.phone}
   end
+
+  # there is an option to make the full name virtual field and try again may be it can be done
 end

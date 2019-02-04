@@ -251,10 +251,11 @@ defmodule Appointment.Appointments do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_appointment(%Patient{} = patient,attrs \\ %{}) do
+  #%Patient{} = patient
+  def create_appointment(attrs \\ %{}) do
     %Appointment{}
     |> Appointment.changeset(attrs)
-    |> Ecto.Changeset.put_change(:patient_id, patient.id)
+    # |> Ecto.Changeset.put_change(:patient_id, patient.id)
     |> Repo.insert()
   end
 

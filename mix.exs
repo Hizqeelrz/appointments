@@ -43,7 +43,8 @@ defmodule Appointment.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:bcrypt_elixir, "~> 1.1"},
-      {:comeonin, "~> 4.1"}
+      {:comeonin, "~> 4.1"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

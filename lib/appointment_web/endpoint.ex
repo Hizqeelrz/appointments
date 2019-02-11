@@ -19,7 +19,7 @@ defmodule AppointmentWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     socket("/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket)
-    plug(Phoenix.LiveReloader)    
+    plug(Phoenix.LiveReloader)
     plug Phoenix.CodeReloader
   end
 
@@ -41,6 +41,8 @@ defmodule AppointmentWeb.Endpoint do
     store: :cookie,
     key: "_appointment_key",
     signing_salt: "qtujjx3Z"
+
+  plug CORSPlug
 
   plug AppointmentWeb.Router
 end

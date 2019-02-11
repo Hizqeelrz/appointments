@@ -12,6 +12,6 @@ defmodule AppointmentWeb.Router do
     resources "/patients", PatientController, except: [:new, :edit]
     resources "/appointments", AppointmentController, except: [:new, :edit]
 
-    resources "/users", UserController, only: [:create, :show]
+    resources "/users", UserController, only: [:create, :show, :index]
   end
 end

@@ -119,7 +119,8 @@ defmodule Appointment.Accounts do
   # email and password functions combine in one function
 
   defp email_password_auth(email, password) when is_binary(email) when is_binary(password) do
-    with {:ok, user} <- get_by_email(email), do: verify_password(password, user)
+    with {:ok, user} <- get_by_email(email),
+    do: verify_password(password, user)
   end
 
   # Functions for Retriving Email and Password from the user
@@ -135,7 +136,7 @@ defmodule Appointment.Accounts do
   end
 
   defp verify_password(password, %User{} = user) when is_binary(password) do
-    if checkpw(password, user.password_has) do
+    if checkpw(password, user.password_hash) do
       {:ok, user}
     else
       {:error, :invalid_password}

@@ -1,5 +1,5 @@
 defmodule Appointment.Guardian do
-  use Guardian, otp_app: :Appointment
+  use Guardian, otp_app: :appointment
 
   def subject_for_token(user, _claims) do
     sub = to_string(user.id)

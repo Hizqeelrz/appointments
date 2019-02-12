@@ -27,15 +27,18 @@ defmodule AppointmentWeb.UserController do
          {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> render("jwt.json", jwt: token)
-      # |> put_status(:created)
-      # |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      # |> render("show.json", user: user)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
+  # def show(conn, %{"id" => id}) do
+  #   user = Accounts.get_user!(id)
+  #   render(conn, "show.json", user: user)
+  # end
+
+  def show(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    conn
+    |> render("show.json", user: user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do

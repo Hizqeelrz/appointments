@@ -15,5 +15,6 @@ defmodule AppointmentWeb.Router do
     # resources "/users", UserController, only: [:create, :show, :index]
 
     post "/sign_up", UserController, :create
+    post "/sign_in", UserController, :sign_in
   end
 end

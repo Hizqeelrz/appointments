@@ -29,6 +29,6 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :Appointment, Appointment.Guardian,
-       issuer: "Appointment",
-       secret_key: "s7jdGWs3yxo1daHGziSbo0067wga+gGUYpc384vm0mXKt03HUmNtk+ldodhfZ410"
+config :appointment, Appointment.Guardian,
+        issuer: "Appointment",
+        secret_key: "s7jdGWs3yxo1daHGziSbo0067wga+gGUYpc384vm0mXKt03HUmNtk+ldodhfZ410"

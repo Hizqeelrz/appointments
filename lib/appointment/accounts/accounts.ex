@@ -7,7 +7,7 @@ defmodule Appointment.Accounts do
   alias Appointment.Repo
 
   alias Appointment.Guardian
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkup: 0]
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
   alias Appointment.Accounts.User
 
@@ -127,7 +127,7 @@ defmodule Appointment.Accounts do
   defp get_by_email(email) when is_binary(email) do
     case Repo.get_by(User, email: email) do
       nil ->
-        dummy_checkup()
+        dummy_checkpw()
         {:error, "Login error."}
       user ->
         {:ok, user}

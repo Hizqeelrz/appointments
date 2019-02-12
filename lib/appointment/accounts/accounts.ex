@@ -6,6 +6,9 @@ defmodule Appointment.Accounts do
   import Ecto.Query, warn: false
   alias Appointment.Repo
 
+  alias Appointment.Guardian
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkup: 0]
+
   alias Appointment.Accounts.User
 
   @doc """
@@ -101,4 +104,42 @@ defmodule Appointment.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  # Token generation for authenticated user
+
+  def token_sign_in(email, password) do
+    case email_password_auth(email, password) do
+      {:ok, user} ->
+        Guardian.encode_and_sign(user)
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
+
+  # email and password functions combine in one function
+
+  defp email_password_auth(email, password) when is_binary(email) when is_binary(password) do
+    with {:ok, user} <- get_by_email(email), do: verify_password(password, user)
+  end
+
+  # Functions for Retriving Email and Password from the user
+
+  defp get_by_email(email) when is_binary(email) do
+    case Repo.get_by(User, email: email) do
+      nil ->
+        dummy_checkup()
+        {:error, "Login error."}
+      user ->
+        {:ok, user}
+    end
+  end
+
+  defp verify_password(password, %User{} = user) when is_binary(password) do
+    if checkpw(password, user.password_has) do
+      {:ok, user}
+    else
+      {:error, :invalid_password}
+    end
+  end
+
 end

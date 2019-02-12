@@ -4,6 +4,8 @@ defmodule AppointmentWeb.UserController do
   alias Appointment.Accounts
   alias Appointment.Accounts.User
 
+  alias Appointment.Guardian
+
   action_fallback AppointmentWeb.FallbackController
 
   def index(conn, _params) do
@@ -12,11 +14,13 @@ defmodule AppointmentWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params),
+         {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("jwt.json", jwt: token)
+      # |> put_status(:created)
+      # |> put_resp_header("location", Routes.user_path(conn, :show, user))
+      # |> render("show.json", user: user)
     end
   end
 

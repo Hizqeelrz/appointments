@@ -12,7 +12,11 @@ defmodule AppointmentWeb.DoctorController do
   end
 
   def create(conn, %{"doctor" => doctor_params}) do
+    IO.inspect "=================="
+    IO.inspect doctor_params
     with {:ok, %Doctor{} = doctor} <- Appointments.create_doctor(doctor_params) do
+      IO.inspect doctor
+      IO.inspect "++++++++++++++++++++"
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.doctor_path(conn, :show, doctor))

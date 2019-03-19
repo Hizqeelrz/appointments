@@ -42,7 +42,7 @@ defmodule AppointmentWeb.Endpoint do
     key: "_appointment_key",
     signing_salt: "qtujjx3Z"
 
-  plug CORSPlug
+  plug CORSPlug, origin: ["http://localhost:3000"]
 
   plug AppointmentWeb.Router
 end
